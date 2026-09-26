@@ -190,6 +190,76 @@
     });
   }
 
+  /* ---------- マウスに追従するボール ---------- */
+  const ball = document.querySelector(".cursor-ball");
+  if (ball && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    const EASE = 0.8; // 追従の滑らかさ（1で遅れなし）
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const target = { x: 0, y: 0 };
+    const pos = { x: 0, y: 0 };
+    let raf = null;
+
+    const render = () => {
+      pos.x += (target.x - pos.x) * EASE;
+      pos.y += (target.y - pos.y) * EASE;
+      ball.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+      // ほぼ追いついたら停止し、次のマウス移動で再開
+      raf = Math.hypot(target.x - pos.x, target.y - pos.y) > 0.1 ? requestAnimationFrame(render) : null;
+    };
+
+    // 表示するのは「支援する」ボタンか Support セクションの上だけ。リンクの上では1.5倍に拡大
+    const AREA = ".gnav__cta, .support, .hero";
+    const update = (el) => {
+      const show = !!el?.closest(AREA);
+      ball.classList.toggle("is-link", show && !!el.closest("a"));
+      if (!show) {
+        ball.classList.remove("is-visible");
+        return false;
+      }
+      // 表示し始めや動きを減らす設定では遅れなしで移動
+      if (!ball.classList.contains("is-visible") || reduce) {
+        pos.x = target.x;
+        pos.y = target.y;
+        ball.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+        ball.classList.add("is-visible");
+        return false;
+      }
+      return true;
+    };
+
+    let hasPointer = false;
+    document.addEventListener("mousemove", (e) => {
+      hasPointer = true;
+      target.x = e.clientX;
+      target.y = e.clientY;
+      if (update(e.target) && !raf) raf = requestAnimationFrame(render);
+    });
+    // マウスを動かさずにスクロールした場合も、カーソル下の要素で判定し直す
+    window.addEventListener("scroll", () => hasPointer && update(document.elementFromPoint(target.x, target.y)), {
+      passive: true,
+    });
+    // ウィンドウの外に出たら隠す
+    document.documentElement.addEventListener("mouseleave", () => {
+      hasPointer = false;
+      ball.classList.remove("is-visible", "is-link");
+    });
+  }
+
+  /* ---------- クリック時の波紋（hero・「支援する」ボタン・Support） ---------- */
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.addEventListener("click", (e) => {
+      // キーボード操作によるクリック（座標なし）では出さない
+      if (e.detail === 0 || !e.target.closest(".hero, .gnav__cta, .support")) return;
+      const ripple = document.createElement("span");
+      ripple.className = "click-ripple";
+      ripple.setAttribute("aria-hidden", "true");
+      ripple.style.left = `${e.clientX}px`;
+      ripple.style.top = `${e.clientY}px`;
+      ripple.addEventListener("animationend", () => ripple.remove());
+      document.body.appendChild(ripple);
+    });
+  }
+
   /* ---------- マーカー（黄色・白い下線）：左から右へ伸ばす ---------- */
   const markers = document.querySelectorAll(
     ".about__catch span, .charm__catch > span, .future__text mark, .support__text mark",
