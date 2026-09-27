@@ -54,19 +54,12 @@
           aria-hidden="true"
           focusable="false"
         >
-          <defs>
-            <linearGradient id="heroGradSp" x1="0" y1="0" x2="0.35" y2="1">
-              <stop offset="0" stop-color="#1b1478" />
-              <stop offset=".75" stop-color="#2a219e" />
-              <stop offset="1" stop-color="#1c1577" />
-            </linearGradient>
-          </defs>
-          <rect width="768" height="1090" fill="url(#heroGradSp)" />
+          <!-- 背景のグラデーションは .hero の CSS 背景で描画（ヒーロー全体の高さに広げるため） -->
           <circle cx="40" cy="-130" r="330" class="hero__ring" />
-          <circle cx="720" cy="-160" r="220" class="hero__ring" />
-          <line x1="605" y1="0" x2="0" y2="224" pathLength="1" class="hero__stripe hero__stripe--red" />
-          <line x1="660" y1="0" x2="0" y2="317" pathLength="1" class="hero__stripe hero__stripe--blue" />
-          <line x1="700" y1="0" x2="0" y2="391" pathLength="1" class="hero__stripe hero__stripe--green" />
+          <circle cx="720" cy="-80" r="180" class="hero__ring" />
+          <line x1="660" y1="-10" x2="-10" y2="290" pathLength="1" class="hero__stripe hero__stripe--red" />
+          <line x1="710" y1="-10" x2="-10" y2="370" pathLength="1" class="hero__stripe hero__stripe--blue" />
+          <line x1="760" y1="-10" x2="-10" y2="450" pathLength="1" class="hero__stripe hero__stripe--green" />
         </svg>
 
         <!-- スライダー -->
@@ -162,7 +155,7 @@
           <p class="about__label">車いすハンドボールとは</p>
           <h2 class="about__title">多くの人が主役になれる、<br class="sp" />みんなのスポーツ。</h2>
           <p class="about__lead">
-            障がいのある人もない人も、子どもも大人も、<br
+            障がいのある人もない人も、<span>子どもも大人も、</span><br
               class="sp"
             />同じコートで本気で競い合えます。<br />そんなスポーツは、そう多くありません。
           </p>
@@ -206,7 +199,7 @@
               class="sp"
             />日本代表が世界に立ったのは2024年。
           </p>
-          <p class="about__story">この物語はまだ、 始まったばかりです</p>
+          <p class="about__story"><span>この物語はまだ、 <span>始まったばかりです</span></span></p>
           <p class="about__catch">
             <span
               >だからこそ、 この競技の<em>「これから」</em>を<br
