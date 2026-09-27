@@ -248,9 +248,8 @@
           </ol>
 
           <p class="about__text">
-            1988年京都で生まれた日本の車いすハンドボールは、<br
-              class="sp"
-            />いま世界へ広がりはじめています。<br />世界選手権が始まったのは2022年、<br
+            1988年京都で生まれた<span>日本の車いすハンドボールは、</span
+            ><br class="sp" />いま世界へ広がりはじめています。<br />世界選手権が始まったのは2022年、<br
               class="sp"
             />日本代表が世界に立ったのは2024年。
           </p>
@@ -273,13 +272,13 @@
           <h2 class="charm__title">観るのも、やるのも、<span>引き込まれる。</span></h2>
 
           <div class="movie">
-            <button class="movie__btn" type="button" aria-label="紹介動画を再生">
+            <button class="movie__btn" type="button" aria-label="紹介動画を再生" aria-haspopup="dialog" aria-controls="movieModal">
               <img src="img/movie-thumb.jpg" alt="車いすハンドボールの試合の様子" />
               <span class="movie__play" aria-hidden="true"></span>
             </button>
           </div>
 
-          <p class="charm__lead">障がいを越えて、<em class="dot">本気</em>でぶつかり合う。</p>
+          <p class="charm__lead">障がいを越えて、<span><em class="dot">本気</em>でぶつかり合う。</span></p>
           <p class="charm__catch">
             <span
               >その<span class="color-blue">光景</span>そのものが、<strong class="color-red">心</strong>を動かす。</span
@@ -409,18 +408,20 @@
         <div class="future__inner">
           <p class="sec-label">車いすハンドボールだからこそ</p>
           <h2 class="future__title">描ける<span>未来</span></h2>
-          <p class="future__lead"><span>この競技が育てるのは、強いチームだけではありません。</span></p>
+          <p class="future__lead">
+            <span>この競技が育てるのは、<br class="sp">強いチームだけではありません。</br>
+          </p>
           <div class="future__text">
-            <p>障がいがあってもなくても、誰かが自分の役割を見つけ、<br />できることを増やし、変わっていきます。</p>
+            <p>障がいがあってもなくても、<span>誰かが自分の役割を見つけ、</span><br />できることを増やし、<span>変わっていきます。</span></p>
             <p>
-              この競技はいま、2032年ブリスベンパラリンピックでの正式種目採択を目指して、<br />世界で実績を積み上げている最中です。
+              <span>この競技はいま、</span><span>2032年ブリスベンパラリンピックでの</span><span>正式種目採択を目指して、</span><br />世界で実績を<span>積み上げている最中です。</span>
             </p>
             <p>
-              プレーする人も、支える人も、応援する人も混ざり合って、<br /><mark
-                >日本にまだない新しい文化を、一緒につくっていけます。</mark
+              プレーする人も、支える人も、<span>応援する人も混ざり合って、</span><br /><mark
+                >日本にまだない新しい文化を、<span>一緒につくっていけます。</span></mark
               >
             </p>
-            <p>車いすハンドボールには、その可能性があります。</p>
+            <p>車いすハンドボールには、<span>その可能性があります。</span></p>
           </div>
 
           <ul class="future__cards">
@@ -468,17 +469,17 @@
             その一歩が、<span><em>未来</em>になる</span>
           </h2>
           <div class="support__text">
-            <p>いま、この競技は選手一人ひとりの力で前に進んでいます。</p>
-            <p>あなたの寄付や、企業の協賛が、その景色を変えます。</p>
+            <p>いま、この競技は<span>選手一人ひとりの力で<span>前に進んでいます。</span></span></p>
+            <p>あなたの寄付や、企業の協賛が、<span>その景色を変えます。</span></p>
             <p>金額も、関わり方も自由です。</p>
-            <p><mark>この面白さを一緒に広げる仲間として、力を貸してください。</mark></p>
+            <p><mark>この面白さを一緒に広げる仲間として、<span>力を貸してください。</span></mark></p>
           </div>
           <a href="#" class="btn btn--red">寄付について</a>
 
           <div class="support__corp">
             <h3 class="support__corp-title">法人スポンサーのご相談について</h3>
             <p>
-              ダイバーシティへの取り組みとして、車いすハンドボールを応援しませんか。<br />協賛プランの詳しいプランについては、下記ページをご覧ください。
+              ダイバーシティへの取り組みとして、<span>車いすハンドボールを<span>応援しませんか。</span></span><br /><span>協賛プランの詳しい<span>プランについては、</span></span><span>下記ページをご覧ください。</span>
             </p>
             <a href="#" class="btn btn--line">法人協賛について</a>
           </div>
@@ -531,6 +532,17 @@
       </div>
       <p class="footer__copy"><small>&copy; 一般社団法人日本車椅子ハンドボール連盟</small></p>
     </footer>
+
+    <!-- 紹介動画モーダル（プレイヤーは開いたときにJSで読み込む） -->
+    <dialog class="movie-modal" id="movieModal" aria-label="紹介動画">
+      <div class="movie-modal__inner">
+        <button class="movie-modal__close" type="button" aria-label="動画を閉じる"></button>
+        <div
+          class="movie-modal__player"
+          data-src="https://www.youtube.com/embed/HTBAY5SfxhQ?si=ecIRYe5X2d8jgWhN&amp;autoplay=1"
+        ></div>
+      </div>
+    </dialog>
 
     <!-- マウスに追従するボール（装飾） -->
     <div class="cursor-ball" aria-hidden="true">

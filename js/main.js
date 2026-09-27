@@ -105,6 +105,35 @@
     start();
   }
 
+  /* ---------- 紹介動画モーダル ---------- */
+  const movieBtn = document.querySelector(".movie__btn");
+  const movieModal = document.getElementById("movieModal");
+  if (movieBtn && movieModal?.showModal) {
+    const player = movieModal.querySelector(".movie-modal__player");
+    movieBtn.addEventListener("click", () => {
+      // 開くたびにプレイヤーを読み込み、自動再生する
+      const iframe = document.createElement("iframe");
+      iframe.src = player.dataset.src;
+      iframe.title = "YouTube video player";
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      iframe.allowFullscreen = true;
+      player.replaceChildren(iframe);
+      movieModal.showModal();
+    });
+    movieModal.querySelector(".movie-modal__close").addEventListener("click", () => movieModal.close());
+    // 背景（プレイヤーの外側）をクリックしたら閉じる
+    movieModal.addEventListener("click", (e) => {
+      if (!e.target.closest(".movie-modal__player, .movie-modal__close")) movieModal.close();
+    });
+    // 閉じたらプレイヤーを破棄して再生を止め（Escキーで閉じた場合も含む）、フォーカスを再生ボタンへ戻す
+    movieModal.addEventListener("close", () => {
+      player.replaceChildren();
+      movieBtn.focus({ preventScroll: true });
+    });
+  }
+
   /* ---------- ルールのタブ切り替え ---------- */
   const tabs = document.querySelectorAll(".rule-card");
   const select = (tab) => {
@@ -264,11 +293,12 @@
       raf = Math.hypot(target.x - pos.x, target.y - pos.y) > 0.1 ? requestAnimationFrame(render) : null;
     };
 
-    // 表示するのは「支援する」ボタンか Support セクションの上だけ。リンクの上では1.5倍に拡大
-    const AREA = ".gnav__cta, .support, .hero";
+    // 表示するのは hero・「支援する」ボタン・Support・動画ブロックの上だけ。リンクと動画の上では拡大
+    const AREA = ".gnav__cta, .support, .hero, .movie";
+    const ENLARGE = "a, .movie";
     const update = (el) => {
       const show = !!el?.closest(AREA);
-      ball.classList.toggle("is-link", show && !!el.closest("a"));
+      ball.classList.toggle("is-link", show && !!el.closest(ENLARGE));
       if (!show) {
         ball.classList.remove("is-visible");
         return false;
@@ -306,18 +336,19 @@
     window.addEventListener("blur", () => ball.classList.remove("is-pressed"));
   }
 
-  /* ---------- クリック時の波紋（hero・「支援する」ボタン・Support） ---------- */
+  /* ---------- クリック時の波紋（hero・「支援する」ボタン・Support・動画ブロック） ---------- */
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.addEventListener("click", (e) => {
       // キーボード操作によるクリック（座標なし）では出さない
-      if (e.detail === 0 || !e.target.closest(".hero, .gnav__cta, .support")) return;
+      if (e.detail === 0 || !e.target.closest(".hero, .gnav__cta, .support, .movie")) return;
       const ripple = document.createElement("span");
       ripple.className = "click-ripple";
       ripple.setAttribute("aria-hidden", "true");
       ripple.style.left = `${e.clientX}px`;
       ripple.style.top = `${e.clientY}px`;
       ripple.addEventListener("animationend", () => ripple.remove());
-      document.body.appendChild(ripple);
+      // 動画クリックでモーダルが開いた場合など、最前面のダイアログがあればその中に出す（背面だと隠れるため）
+      (document.querySelector("dialog[open]") || document.body).appendChild(ripple);
     });
   }
 

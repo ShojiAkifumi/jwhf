@@ -845,7 +845,7 @@ p.sec-label,
 }
 .about__lead {
   margin-top: 1.9em;
-  font-size: clamp(14px, 1.15vw, 22px);
+  font-size: clamp(15px, 1.15vw, 22px);
   font-weight: 700;
   line-height: 1.75;
   letter-spacing: 0.05em;
@@ -912,7 +912,7 @@ p.sec-label,
 }
 .history__s {
   display: block;
-  font-size: 0.47em;
+  font-size: max(15px, 0.47em);
   line-height: 1.1;
 }
 /* 「誕生」「開始」と「世界2位」の高さを揃え、年号の位置を横一列にする */
@@ -930,7 +930,7 @@ p.sec-label,
   line-height: 1;
 }
 .history__v {
-  font-size: 0.5em;
+  font-size: max(15px, 0.5em);
   line-height: 1.05;
   text-align: center;
 }
@@ -953,7 +953,7 @@ p.sec-label,
 
 .about__text {
   margin-top: clamp(40px, 4.4vw, 84px);
-  font-size: clamp(14px, 1.15vw, 22px);
+  font-size: clamp(15px, 1.15vw, 22px);
   font-weight: 700;
   line-height: 1.75;
 }
@@ -1011,16 +1011,16 @@ p.sec-label,
     padding: calc(60 * var(--a)) calc(30 * var(--a)) calc(80 * var(--a));
   }
   .about__label {
-    font-size: calc(17 * var(--a));
+    font-size: max(15px, calc(17 * var(--a)));
   }
   .about__title {
     margin-top: calc(10 * var(--a));
-    font-size: calc(29 * var(--a));
+    font-size: max(15px, calc(29 * var(--a)));
     line-height: 1.25;
   }
   .about__lead {
     margin-top: calc(25 * var(--a));
-    font-size: calc(13.5 * var(--a));
+    font-size: max(15px, calc(13.5 * var(--a)));
     line-height: 1.6;
     letter-spacing: 0.03em;
   }
@@ -1064,7 +1064,7 @@ p.sec-label,
   }
   .history__head {
     display: block;
-    font-size: calc(21 * var(--a));
+    font-size: max(15px, calc(21 * var(--a)));
     white-space: nowrap;
   }
   .history__head br {
@@ -1089,18 +1089,21 @@ p.sec-label,
   }
   .history__year {
     margin: 0;
-    font-size: calc(26 * var(--a));
+    font-size: max(15px, calc(26 * var(--a)));
     text-align: right;
   }
 
   .about__text {
     margin-top: calc(12 * var(--a));
-    font-size: calc(13.5 * var(--a));
+    font-size: max(15px, calc(13.5 * var(--a)));
     line-height: 1.6;
+  }
+  .about__text span {
+    display: inline-block;
   }
   .about__story {
     margin-top: calc(25 * var(--a));
-    font-size: calc(16 * var(--a));
+    font-size: max(15px, calc(16 * var(--a)));
     letter-spacing: 0.08em;
   }
   .about__story::before,
@@ -1109,7 +1112,7 @@ p.sec-label,
   }
   .about__catch {
     margin: calc(4 * var(--a)) calc(-12 * var(--a)) 0;
-    font-size: calc(19 * var(--a));
+    font-size: max(15px, calc(19 * var(--a)));
     line-height: 2.25;
     letter-spacing: 0.03em;
   }
@@ -1276,8 +1279,8 @@ p.sec-label,
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 138px;
-  height: 90px;
+  width: 82px;
+  height: 54px;
   transform: translate(-50%, -50%);
   background: #ff0033;
   border-radius: 14px;
@@ -1289,13 +1292,25 @@ p.sec-label,
   top: 50%;
   transform: translate(-35%, -50%);
   border-style: solid;
-  border-width: 17px 0 17px 30px;
+  border-width: 10px 0 10px 18px;
   border-color: transparent transparent transparent #fff;
+}
+@media (min-width: 500px) {
+  .movie__play {
+    width: 138px;
+    height: 90px;
+  }
+  .movie__play::after {
+    border-width: 17px 0 17px 30px;
+  }
 }
 .charm__lead {
   margin-top: clamp(40px, 3.5vw, 76px);
-  font-size: clamp(16px, 1.6vw, 30px);
+  font-size: clamp(18px, 1.6vw, 30px);
   font-weight: 900;
+}
+.charm__lead span {
+  display: inline-block;
 }
 .dot {
   position: relative;
@@ -1425,13 +1440,14 @@ p.sec-label,
   font-family: var(--ff-en);
   font-style: italic;
   font-weight: 800;
-  font-size: max(11px, calc(26 * var(--k)));
+  font-size: max(15px, calc(26 * var(--k)));
   line-height: 1;
   color: var(--c-yellow);
 }
 .point__num span {
   margin-left: 0.08em;
-  font-size: 3.6em;
+  /* 親の最小値（15px）に引きずられないよう、デザイン値から直接指定（26px × 3.6） */
+  font-size: max(15px, calc(26 * 3.6 * var(--k)));
   line-height: 0.95;
   color: transparent;
   -webkit-text-stroke: max(1.5px, calc(3.5 * var(--k))) var(--c-yellow);
@@ -1444,7 +1460,7 @@ p.sec-label,
 }
 .point__text {
   margin-top: calc(26 * var(--k));
-  font-size: max(12px, calc(26 * var(--k)));
+  font-size: max(15px, calc(26 * var(--k)));
   font-weight: 500;
   line-height: 1.46;
   letter-spacing: 0.06em;
@@ -1480,10 +1496,10 @@ p.sec-label,
     top: 40px;
   }
   .charm__catch {
-    font-size: 4.9vw;
+    font-size: max(16px, 8vw);
   }
   .charm__title {
-    font-size: 8vw;
+    font-size: max(15px, 8vw);
   }
 
   .points {
@@ -1544,19 +1560,19 @@ p.sec-label,
     width: calc(300 * var(--k));
   }
   .point__num {
-    font-size: calc(14 * var(--k));
+    font-size: max(15px, calc(14 * var(--k)));
   }
   .point__num span {
-    font-size: 3.2em;
+    font-size: max(15px, calc(14 * 3.2 * var(--k)));
     -webkit-text-stroke-width: 2px;
   }
   .point__title {
     margin-top: calc(10 * var(--k));
-    font-size: calc(27 * var(--k));
+    font-size: max(15px, calc(27 * var(--k)));
   }
   .point__text {
     margin-top: calc(14 * var(--k));
-    font-size: calc(13.5 * var(--k));
+    font-size: max(15px, calc(13.5 * var(--k)));
     line-height: 1.48;
     letter-spacing: 0.02em;
   }
@@ -1684,7 +1700,7 @@ p.sec-label,
 }
 .rule-card__cap {
   margin-top: 4px;
-  font-size: clamp(12px, 1.15vw, 22px);
+  font-size: clamp(15px, 1.15vw, 22px);
   font-weight: 700;
 }
 .rule-card__cap span {
@@ -1699,7 +1715,7 @@ p.sec-label,
   max-width: 224px;
   margin-top: 6px;
   padding: 2px 0;
-  font-size: clamp(10px, 0.7vw, 13px);
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.1em;
   border: 1px dashed var(--c-red);
@@ -1751,7 +1767,7 @@ p.sec-label,
 }
 .rule-panel__text {
   margin-top: 12px;
-  font-size: clamp(14px, 1.15vw, 22px);
+  font-size: clamp(15px, 1.15vw, 22px);
   font-weight: 500;
   line-height: 1.6;
 }
@@ -1761,7 +1777,7 @@ p.sec-label,
   border: 2px dashed var(--c-red);
 }
 .rule-panel__list dt {
-  font-size: clamp(14px, 1.05vw, 20px);
+  font-size: clamp(15px, 1.05vw, 20px);
   font-weight: 700;
 }
 .rule-panel__list dt::before {
@@ -1772,7 +1788,7 @@ p.sec-label,
   margin-top: 18px;
 }
 .rule-panel__list dd {
-  font-size: clamp(12px, 0.8vw, 15px);
+  font-size: 15px;
   line-height: 1.6;
 }
 
@@ -1883,7 +1899,7 @@ p.sec-label,
 }
 .future__text {
   margin-top: calc(60 * var(--f));
-  font-size: max(12px, calc(23 * var(--f)));
+  font-size: max(15px, calc(23 * var(--f)));
   font-weight: 700;
   line-height: 1.7;
   color: #6b6e6e;
@@ -1930,7 +1946,7 @@ p.sec-label,
   border-bottom: max(1px, calc(2 * var(--f))) solid var(--c-blue-l);
 }
 .f-card p {
-  font-size: max(12px, calc(23 * var(--f)));
+  font-size: max(15px, calc(23 * var(--f)));
   font-weight: 500;
   line-height: 1.75;
   color: #333;
@@ -2066,29 +2082,33 @@ p.sec-label,
     padding: calc(60 * var(--f)) calc(12 * var(--f)) calc(43 * var(--f));
   }
   .future .sec-label {
-    font-size: calc(15 * var(--f));
+    font-size: max(15px, calc(15 * var(--f)));
   }
   .future__title {
     margin-top: calc(10 * var(--f));
-    font-size: calc(56 * var(--f));
+    font-size: max(15px, calc(56 * var(--f)));
   }
   .future__lead {
+    display: inline-block;
     margin-top: calc(34 * var(--f));
-    font-size: calc(15 * var(--f));
+    font-size: max(15px, calc(22 * var(--f)));
+    line-height: 2.5;
   }
   .future__lead span {
-    display: block;
     padding: 0 0 calc(4 * var(--f));
     border-bottom-width: 1.5px;
   }
   .future__text {
     margin-top: calc(28 * var(--f));
-    font-size: calc(12.5 * var(--f));
+    font-size: max(15px, calc(12.5 * var(--f)));
     line-height: 1.8;
     text-align: center;
   }
   .future__text br {
     display: inline;
+  }
+  .future__text span {
+    display: inline-block;
   }
   .future__text p + p {
     margin-top: calc(8 * var(--f));
@@ -2112,12 +2132,12 @@ p.sec-label,
   .f-card__title {
     margin-bottom: calc(8 * var(--f));
     padding-left: calc(8 * var(--f));
-    font-size: calc(15 * var(--f));
+    font-size: max(15px, calc(15 * var(--f)));
     border-left-width: 4px;
     border-bottom-width: 1px;
   }
   .f-card p {
-    font-size: calc(13 * var(--f));
+    font-size: max(15px, calc(13 * var(--f)));
     line-height: 1.65;
   }
 
@@ -2151,7 +2171,7 @@ p.sec-label,
   .welcome__copy span {
     height: calc(36 * var(--f));
     padding: 0 0 0 calc(18 * var(--f));
-    font-size: calc(18 * var(--f));
+    font-size: max(15px, calc(18 * var(--f)));
   }
   .welcome__copy span:nth-child(1) {
     width: calc(358 * var(--f));
@@ -2162,7 +2182,7 @@ p.sec-label,
   .welcome__copy span.is-lg {
     width: calc(402 * var(--f));
     height: calc(48 * var(--f));
-    font-size: calc(27 * var(--f));
+    font-size: max(15px, calc(27 * var(--f)));
   }
   .welcome__copy span::before,
   .welcome__copy span::after {
@@ -2218,10 +2238,13 @@ p.sec-label,
 }
 .support__text {
   margin-top: clamp(20px, 1.8vw, 34px);
-  font-size: clamp(14px, 1.1vw, 20px);
+  font-size: clamp(15px, 1.1vw, 20px);
   font-weight: 700;
   color: var(--c-gray);
   line-height: 2.2;
+}
+.support__text span {
+  display: inline-block;
 }
 .support__text mark {
   color: #1e1e1e;
@@ -2244,9 +2267,12 @@ p.sec-label,
 }
 .support__corp p {
   margin-top: 16px;
-  font-size: clamp(13px, 1vw, 19px);
+  font-size: clamp(15px, 1vw, 19px);
   font-weight: 500;
   line-height: 2;
+}
+.support__corp span {
+  display: inline-block;
 }
 .support__corp .btn--line {
   margin-top: 30px;
@@ -2258,9 +2284,6 @@ p.sec-label,
   }
   .support__text p + p {
     margin-top: 0.4em;
-  }
-  .support__corp p br {
-    display: none;
   }
   .btn--red {
     height: 64px;
@@ -2300,13 +2323,13 @@ p.sec-label,
 }
 .footer__name {
   margin-top: 12px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.6;
 }
 .footer__address {
   margin-top: 14px;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.7;
 }
 .footer__contact {
@@ -2315,7 +2338,7 @@ p.sec-label,
   gap: 5px;
   margin-top: 14px;
   padding: 2px 10px;
-  font-size: 13px;
+  font-size: 15px;
   border: 1px solid #ccc;
   border-radius: 99px;
 }
@@ -2349,7 +2372,7 @@ p.sec-label,
 .footer__copy {
   margin-top: 16px;
   text-align: center;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 @media (max-width: 767px) {
@@ -2448,6 +2471,84 @@ p.sec-label,
   }
 }
 
+/* ---------- 紹介動画モーダル ---------- */
+.movie-modal {
+  width: min(1100px, 100% - 32px);
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  overflow: visible;
+  color: #fff;
+  background: none;
+  border: 0;
+}
+.movie-modal::backdrop {
+  background: rgba(10, 8, 40, 0.85);
+}
+.movie-modal[open],
+.movie-modal[open]::backdrop {
+  animation: movieModalIn 0.3s ease;
+}
+@keyframes movieModalIn {
+  from {
+    opacity: 0;
+  }
+}
+.movie-modal__inner {
+  position: relative;
+  /* 縦長の画面でも16:9のプレイヤーが画面の高さに収まるよう幅を制限 */
+  width: min(100%, (100dvh - 120px) * 16 / 9);
+  margin: 0 auto;
+}
+/* レスポンシブなプレイヤー（16:9） */
+.movie-modal__player {
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+.movie-modal__player iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.movie-modal__close {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  width: 44px;
+  height: 44px;
+}
+.movie-modal__close::before,
+.movie-modal__close::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.movie-modal__close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.movie-modal__close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+/* モーダル表示中は背面のスクロールを止める */
+html:has(.movie-modal[open]) {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .movie-modal[open],
+  .movie-modal[open]::backdrop {
+    animation: none;
+  }
+}
+
 /* ---------- マウスに追従するボール ----------
    外側（位置）はJSで translate プロパティを更新、内側の画像はCSSで常に回転 */
 .cursor-ball {
@@ -2459,27 +2560,43 @@ p.sec-label,
   height: 40px;
   margin: -20px 0 0 -20px; /* ボールの中心をカーソル位置に合わせる */
   pointer-events: none;
+  /* 非表示：領域から出ると、その場で縮小しながら消える */
   opacity: 0;
+  scale: 0;
   transition:
-    opacity 0.1s,
+    opacity 0.3s ease-in,
+    scale 0.3s ease-in,
     width 0.5s ease,
     margin 0.5s ease,
-    height 0.5s ease,
-    scale 0.15s ease;
+    height 0.5s ease;
   will-change: translate, scale;
 }
+/* 表示：領域に入ると、少し弾むように拡大しながら現れる */
+.cursor-ball.is-visible {
+  opacity: 1;
+  scale: 1;
+  transition:
+    opacity 0.2s ease-out,
+    scale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    width 0.5s ease,
+    margin 0.5s ease,
+    height 0.5s ease;
+}
 /* クリック中は20%縮小。位置は translate プロパティで指定しているため、ボールの中心を原点に縮小される */
-.cursor-ball.is-pressed {
+.cursor-ball.is-visible.is-pressed {
   scale: 0.8;
+  transition:
+    opacity 0.2s ease-out,
+    scale 0.15s ease,
+    width 0.5s ease,
+    margin 0.5s ease,
+    height 0.5s ease;
 }
 /* リンクの上では1.5倍 */
 .cursor-ball.is-link {
   width: 70px;
   height: 70px;
   margin: -35px 0 0 -35px;
-}
-.cursor-ball.is-visible {
-  opacity: 1;
 }
 .cursor-ball img {
   display: block;
@@ -2502,10 +2619,19 @@ p.sec-label,
   .cursor-ball img {
     animation: none;
   }
+  /* 拡大・縮小はせず、フェードのみ */
+  .cursor-ball,
+  .cursor-ball.is-visible,
+  .cursor-ball.is-visible.is-pressed {
+    scale: 1;
+    transition: opacity 0.2s;
+  }
 }
 .gnav__cta,
 .support,
-.hero {
+.hero,
+.movie,
+.movie * {
   cursor: grab !important;
 }
 
