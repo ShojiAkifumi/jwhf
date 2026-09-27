@@ -141,14 +141,14 @@
       const on = t === tab;
       t.classList.toggle("is-active", on);
       t.setAttribute("aria-selected", String(on));
-      t.tabIndex = on ? 0 : -1;
       const panel = document.getElementById(t.getAttribute("aria-controls"));
       panel.hidden = !on;
       panel.classList.toggle("is-active", on);
     });
   };
+  // すべてのカードを Tab キーで順に移動できるようにする（矢印キーでの切り替えも併用可）
   tabs.forEach((tab, i) => {
-    tab.tabIndex = tab.classList.contains("is-active") ? 0 : -1;
+    tab.tabIndex = 0;
     tab.addEventListener("click", () => select(tab));
     tab.addEventListener("keydown", (e) => {
       const dir = { ArrowRight: 1, ArrowLeft: -1 }[e.key];

@@ -17,7 +17,7 @@
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto+Flex:ital,opsz,wght@1,14..144,800&text=0123456789POINTnowJAWH ELCRDB"
+      href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,slnt,wght@14..144,-10..0,800&text=0123456789POINTnowJAWH%20ELCRDB"
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -57,21 +57,21 @@
           <!-- 背景のグラデーションは .hero の CSS 背景で描画（ヒーロー全体の高さに広げるため） -->
           <circle cx="40" cy="-130" r="330" class="hero__ring" />
           <circle cx="720" cy="-80" r="180" class="hero__ring" />
-          <line x1="660" y1="-10" x2="-10" y2="290" pathLength="1" class="hero__stripe hero__stripe--red" />
-          <line x1="710" y1="-10" x2="-10" y2="370" pathLength="1" class="hero__stripe hero__stripe--blue" />
-          <line x1="760" y1="-10" x2="-10" y2="450" pathLength="1" class="hero__stripe hero__stripe--green" />
+          <path d="M660 -10 L-10 290" pathLength="1" class="hero__stripe hero__stripe--red" />
+          <path d="M710 -10 L-10 370" pathLength="1" class="hero__stripe hero__stripe--blue" />
+          <path d="M760 -10 L-10 450" pathLength="1" class="hero__stripe hero__stripe--green" />
         </svg>
 
         <!-- スライダー -->
         <div class="hero__slider">
-          <ul class="hero__slides" aria-live="off">
-            <li class="hero__slide is-active" role="group" aria-roledescription="slide" aria-label="1 / 3">
+          <div class="hero__slides" aria-live="off">
+            <div class="hero__slide is-active" role="group" aria-roledescription="slide" aria-label="1 / 3">
               <picture>
                 <source media="(max-width: 767px)" srcset="img/hero-sp-01.jpg" width="768" height="526" />
                 <img src="img/hero-pc-01.jpg" width="1279" height="1018" alt="ボールを持ち、シュート体勢に入る選手" />
               </picture>
-            </li>
-            <li class="hero__slide" role="group" aria-roledescription="slide" aria-label="2 / 3">
+            </div>
+            <div class="hero__slide" role="group" aria-roledescription="slide" aria-label="2 / 3">
               <picture>
                 <source media="(max-width: 767px)" srcset="img/hero-sp-02.jpg" width="768" height="526" />
                 <img
@@ -82,8 +82,8 @@
                   loading="lazy"
                 />
               </picture>
-            </li>
-            <li class="hero__slide" role="group" aria-roledescription="slide" aria-label="3 / 3">
+            </div>
+            <div class="hero__slide" role="group" aria-roledescription="slide" aria-label="3 / 3">
               <picture>
                 <source media="(max-width: 767px)" srcset="img/hero-sp-03.jpg" width="768" height="526" />
                 <img
@@ -94,8 +94,8 @@
                   loading="lazy"
                 />
               </picture>
-            </li>
-          </ul>
+            </div>
+          </div>
           <div class="hero__dots">
             <button type="button" class="hero__dot is-active" aria-label="スライド1を表示" aria-current="true"></button>
             <button type="button" class="hero__dot" aria-label="スライド2を表示"></button>
@@ -120,9 +120,9 @@
           </defs>
           <polygon points="0,0 1134,0 650,1018 0,1018" fill="url(#heroGradPc)" />
           <g clip-path="url(#heroClipPc)">
-            <line x1="1015" y1="-10" x2="150" y2="1030" pathLength="1" class="hero__stripe hero__stripe--red" />
-            <line x1="1065" y1="-10" x2="330" y2="1030" pathLength="1" class="hero__stripe hero__stripe--blue" />
-            <line x1="1105" y1="-10" x2="510" y2="1030" pathLength="1" class="hero__stripe hero__stripe--green" />
+            <path d="M1015 -10 L150 1030" pathLength="1" class="hero__stripe hero__stripe--red" />
+            <path d="M1065 -10 L330 1030" pathLength="1" class="hero__stripe hero__stripe--blue" />
+            <path d="M1105 -10 L510 1030" pathLength="1" class="hero__stripe hero__stripe--green" />
             <circle cx="200" cy="-10" r="380" class="hero__ring" />
             <circle cx="-20" cy="1010" r="255" class="hero__ring" />
           </g>
@@ -155,9 +155,8 @@
           <p class="about__label">車いすハンドボールとは</p>
           <h2 class="about__title">多くの人が主役になれる、<br class="sp" />みんなのスポーツ。</h2>
           <p class="about__lead">
-            障がいのある人もない人も、<span>子どもも大人も、</span><br
-              class="sp"
-            />同じコートで本気で競い合えます。<br />そんなスポーツは、そう多くありません。
+            障がいのある人もない人も、<span>子どもも大人も、</span
+            ><br class="sp" />同じコートで本気で競い合えます。<br />そんなスポーツは、そう多くありません。
           </p>
 
           <ol class="history">
@@ -199,7 +198,9 @@
               class="sp"
             />日本代表が世界に立ったのは2024年。
           </p>
-          <p class="about__story"><span>この物語はまだ、 <span>始まったばかりです</span></span></p>
+          <p class="about__story">
+            <span>この物語はまだ、 <span>始まったばかりです</span></span>
+          </p>
           <p class="about__catch">
             <span
               >だからこそ、 この競技の<em>「これから」</em>を<br
@@ -218,13 +219,21 @@
           <h2 class="charm__title">観るのも、やるのも、<span>引き込まれる。</span></h2>
 
           <div class="movie">
-            <button class="movie__btn" type="button" aria-label="紹介動画を再生" aria-haspopup="dialog" aria-controls="movieModal">
+            <button
+              class="movie__btn"
+              type="button"
+              aria-label="紹介動画を再生"
+              aria-haspopup="dialog"
+              aria-controls="movieModal"
+            >
               <img src="img/movie-thumb.jpg" alt="車いすハンドボールの試合の様子" />
               <span class="movie__play" aria-hidden="true"></span>
             </button>
           </div>
 
-          <p class="charm__lead">障がいを越えて、<span><em class="dot">本気</em>でぶつかり合う。</span></p>
+          <p class="charm__lead">
+            障がいを越えて、<span><em class="dot">本気</em>でぶつかり合う。</span>
+          </p>
           <p class="charm__catch">
             <span
               >その<span class="color-blue">光景</span>そのものが、<strong class="color-red">心</strong>を動かす。</span
@@ -283,7 +292,7 @@
           <h2 class="sec-title"><em>90</em>秒でわかる、車いすハンドボール</h2>
 
           <div class="rule__tabs" role="tablist">
-            <button class="rule-card is-active" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false">
+            <button class="rule-card is-active" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true">
               <span class="rule-card__key">4 or 6</span><span class="rule-card__cap">コートの人数</span
               ><span class="rule-card__more">詳しくみる</span>
             </button>
@@ -291,7 +300,7 @@
               <span class="rule-card__key">3秒</span><span class="rule-card__cap">ボール保持</span
               ><span class="rule-card__more">詳しくみる</span>
             </button>
-            <button class="rule-card" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="true">
+            <button class="rule-card" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false">
               <span class="rule-card__key">2点</span><span class="rule-card__cap">スペクタクル<span>ゴール</span></span
               ><span class="rule-card__more">詳しくみる</span>
             </button>
@@ -309,13 +318,13 @@
           <div class="rule-panel is-active" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
             <h3 class="rule-panel__title">4人制 or 6人制</h3>
             <p class="rule-panel__text">
-              4人制はチーム全員が同じユニフォームを着用します。<br>固定のゴールキーパーはいません。<br>日本国内では長らく6人制が親しまれてきました。
+              4人制はチーム全員が同じユニフォームを着用します。<br />固定のゴールキーパーはいません。<br />日本国内では長らく6人制が親しまれてきました。
             </p>
           </div>
           <div class="rule-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
             <h3 class="rule-panel__title">ボール保持は3秒まで</h3>
             <p class="rule-panel__text">
-              ハンドボールの「3歩ルール」にあたります。<br>1回のプッシュで長く早く進むテクニックやブレーキの技術が生まれます。
+              ハンドボールの「3歩ルール」にあたります。<br />1回のプッシュで長く早く進むテクニックやブレーキの技術が生まれます。
             </p>
           </div>
           <div class="rule-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>
@@ -345,7 +354,7 @@
             <p class="rule-panel__text">
               障がいの程度に応じて選手一人ひとりに1〜4点の持ち点がつき、コート上の合計が上限を超えないようにチームを組みます。<br />
               障がいの重い人も軽い人も、同じコートで役割を持ちます。<br />
-              ※コート上の合計上限は、4人制11点/6人制17点<br>（6人制の持ち点制は国際ルールのみ。国内大会は持ち点を使わない独自ルールで実施しています）
+              ※コート上の合計上限は、4人制11点/6人制17点<br />（6人制の持ち点制は国際ルールのみ。国内大会は持ち点を使わない独自ルールで実施しています）
             </p>
           </div>
         </div>
@@ -357,12 +366,17 @@
           <p class="sec-label">車いすハンドボールだからこそ</p>
           <h2 class="future__title">描ける<span>未来</span></h2>
           <p class="future__lead">
-            <span>この競技が育てるのは、<br class="sp">強いチームだけではありません。</br>
+            <span>この競技が育てるのは、<br class="sp" />強いチームだけではありません。</span>
           </p>
           <div class="future__text">
-            <p>障がいがあってもなくても、<span>誰かが自分の役割を見つけ、</span><br />できることを増やし、<span>変わっていきます。</span></p>
             <p>
-              <span>この競技はいま、</span><span>2032年ブリスベンパラリンピックでの</span><span>正式種目採択を目指して、</span><br />世界で実績を<span>積み上げている最中です。</span>
+              障がいがあってもなくても、<span>誰かが自分の役割を見つけ、</span><br />できることを増やし、<span
+                >変わっていきます。</span
+              >
+            </p>
+            <p>
+              <span>この競技はいま、</span><span>2032年ブリスベンパラリンピックでの</span
+              ><span>正式種目採択を目指して、</span><br />世界で実績を<span>積み上げている最中です。</span>
             </p>
             <p>
               プレーする人も、支える人も、<span>応援する人も混ざり合って、</span><br /><mark
@@ -417,17 +431,23 @@
             その一歩が、<span><em>未来</em>になる</span>
           </h2>
           <div class="support__text">
-            <p>いま、この競技は<span>選手一人ひとりの力で<span>前に進んでいます。</span></span></p>
+            <p>
+              いま、この競技は<span>選手一人ひとりの力で<span>前に進んでいます。</span></span>
+            </p>
             <p>あなたの寄付や、企業の協賛が、<span>その景色を変えます。</span></p>
             <p>金額も、関わり方も自由です。</p>
-            <p><mark>この面白さを一緒に広げる仲間として、<span>力を貸してください。</span></mark></p>
+            <p>
+              <mark>この面白さを一緒に広げる仲間として、<span>力を貸してください。</span></mark>
+            </p>
           </div>
           <a href="https://jwhf.jp/?page_id=1841" class="btn btn--red" target="_blank">寄付について</a>
 
           <div class="support__corp">
             <h3 class="support__corp-title">法人スポンサーのご相談について</h3>
             <p>
-              ダイバーシティへの取り組みとして、<span>車いすハンドボールを<span>応援しませんか。</span></span><br /><span>協賛プランの詳しい<span>プランについては、</span></span><span>下記ページをご覧ください。</span>
+              ダイバーシティへの取り組みとして、<span>車いすハンドボールを<span>応援しませんか。</span></span
+              ><br /><span>協賛プランの詳しい<span>プランについては、</span></span
+              ><span>下記ページをご覧ください。</span>
             </p>
             <a href="https://jwhf.jp/?page_id=4331" class="btn btn--line" target="_blank">法人協賛について</a>
           </div>
@@ -439,14 +459,18 @@
     <footer class="footer">
       <div class="footer__inner">
         <div class="footer__info">
-          <a href="https://jwhf.jp/" target="_blank"><img src="img/logo-white.png" alt="" width="66" height="66" class="footer__logo" /></a>
+          <a href="https://jwhf.jp/" target="_blank"
+            ><img src="img/logo-white.png" alt="" width="66" height="66" class="footer__logo"
+          /></a>
           <p class="footer__name">
             一般社団法人日本車椅子ハンドボール連盟<br />JWHF（Japan Wheelchair Handball Federation）
           </p>
           <address class="footer__address">
             〒772-0021 <span>徳島県鳴門市里浦町里浦字坂田134-1</span><br />TEL <a href="tel:0886863492">088-686-3492</a>
           </address>
-          <a href="https://form1ssl.fc2.com/form/?id=9faad8aa675f6abb" class="footer__contact" target="_blank">お問い合わせはこちら</a>
+          <a href="https://form1ssl.fc2.com/form/?id=9faad8aa675f6abb" class="footer__contact" target="_blank"
+            >お問い合わせはこちら</a
+          >
         </div>
         <div class="footer__sns">
           <p>公式SNS</p>

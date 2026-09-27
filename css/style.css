@@ -1441,7 +1441,7 @@ p.sec-label,
 }
 .point__num {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   font-family: var(--ff-en);
   font-style: italic;
   font-weight: 800;
@@ -1450,12 +1450,14 @@ p.sec-label,
   color: var(--c-yellow);
 }
 .point__num span {
-  margin-left: 0.08em;
-  /* 親の最小値（15px）に引きずられないよう、デザイン値から直接指定（26px × 3.6） */
+  margin-left: 0.2em;
   font-size: max(15px, calc(26 * 3.6 * var(--k)));
   line-height: 0.95;
   color: transparent;
   -webkit-text-stroke: max(1.5px, calc(3.5 * var(--k))) var(--c-yellow);
+}
+.point:first-child .point__num span {
+  margin-left: 0.08em;
 }
 .point__title {
   margin-top: calc(8 * var(--k));
