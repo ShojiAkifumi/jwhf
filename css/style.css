@@ -2353,6 +2353,9 @@ p.sec-label,
   font-size: 15px;
   line-height: 1.7;
 }
+.footer__address span {
+  display: inline-block;
+}
 .footer__contact {
   display: inline-flex;
   align-items: center;
