@@ -193,6 +193,37 @@
     });
   }
 
+  /* ---------- Support のアニメーションは .welcome のアニメーション終了後に実行 ---------- */
+  const welcome = document.querySelector(".welcome");
+  let welcomeDone = !welcome;
+  const waiting = [];
+  const finishWelcome = () => {
+    if (welcomeDone) return;
+    welcomeDone = true;
+    waiting.splice(0).forEach((fn) => fn());
+  };
+  // Support 内の要素なら .welcome の終了を待ってから実行
+  const runAfterWelcome = (el, fn) => {
+    if (welcomeDone || !el.closest(".support")) return fn();
+    // アンカーリンク等で .welcome を見ないまま通り過ぎた場合は待たない
+    if (!welcome.classList.contains("is-show") && welcome.getBoundingClientRect().bottom < 0) finishWelcome();
+    welcomeDone ? fn() : waiting.push(fn);
+  };
+  const startWelcome = () => {
+    welcome.classList.add("is-show");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return finishWelcome();
+    // 最後の帯のスライドインが終わったら完了
+    const last = welcome.querySelector(".welcome__copy span:last-child");
+    if (!last) return finishWelcome();
+    last.addEventListener("transitionend", (e) => e.propertyName === "transform" && finishWelcome());
+    // transitionend が来ない場合の保険：CSSの delay + duration の最大値＋少し待って完了
+    const cs = getComputedStyle(last);
+    const sec = (v) => v.split(",").map((t) => parseFloat(t) * (t.trim().endsWith("ms") ? 1 : 1000));
+    const delays = sec(cs.transitionDelay);
+    const total = Math.max(...sec(cs.transitionDuration).map((d, i) => d + (delays[i % delays.length] || 0)));
+    setTimeout(finishWelcome, total + 300);
+  };
+
   /* ---------- スクロールでフェードイン ---------- */
   const targets = document.querySelectorAll(
     ".about__inner > :not(.history), .charm__inner > *, .rule__box, .future__inner > *, .support__box > *",
@@ -201,10 +232,11 @@
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((en) => {
-          if (en.isIntersecting) {
-            en.target.classList.add("is-show");
-            io.unobserve(en.target);
-          }
+          if (!en.isIntersecting) return;
+          const el = en.target;
+          io.unobserve(el);
+          if (el === welcome) return startWelcome();
+          runAfterWelcome(el, () => el.classList.add("is-show"));
         });
       },
       { rootMargin: "0px 0px -20% 0px" },
@@ -298,8 +330,9 @@
       (entries) => {
         entries.forEach((en) => {
           if (!en.isIntersecting) return;
-          en.target.classList.add("is-marked");
-          mio.unobserve(en.target);
+          const el = en.target;
+          mio.unobserve(el);
+          runAfterWelcome(el, () => el.classList.add("is-marked"));
         });
       },
       { rootMargin: "0px 0px -15% 0px" },
