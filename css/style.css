@@ -404,22 +404,23 @@ p.sec-label,
   transform-box: fill-box;
   transform-origin: center;
   animation: heroRing 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.3s;
 }
 .hero__ring:nth-of-type(2) {
-  animation-delay: 0.15s;
+  animation-delay: 0.45s;
 }
 .hero__stripe {
   stroke-dasharray: 1 1;
   animation: heroStripe 1.1s cubic-bezier(0.65, 0, 0.35, 1) both;
 }
 .hero__stripe--red {
-  animation-delay: 0.1s;
+  animation-delay: 0.3s;
 }
 .hero__stripe--blue {
-  animation-delay: 0.25s;
+  animation-delay: 0.45s;
 }
 .hero__stripe--green {
-  animation-delay: 0.4s;
+  animation-delay: 0.6s;
 }
 @keyframes heroRing {
   from {
@@ -567,7 +568,7 @@ p.sec-label,
 }
 .hero__title {
   margin-top: calc(11 * var(--u));
-  font-size: calc(137 * var(--u));
+  font-size: calc(140 * var(--u));
   font-weight: 900;
   line-height: 1.2;
   text-shadow: 0 calc(4 * var(--u)) calc(12 * var(--u)) rgba(0, 0, 0, 0.28);
@@ -578,7 +579,7 @@ p.sec-label,
   display: inline-block;
   margin-top: calc(34 * var(--u));
   padding-bottom: calc(6 * var(--u) + var(--marker-h));
-  font-size: calc(47 * var(--u));
+  font-size: calc(48.5 * var(--u));
   font-weight: 900;
   line-height: 1.4;
   letter-spacing: 0.02em;
@@ -620,21 +621,22 @@ p.sec-label,
   animation: heroSlideUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .hero__en {
-  animation-delay: 0.5s;
+  animation-delay: 0.8s;
 }
 .hero__title {
-  animation-delay: 0.65s;
+  animation-delay: 1.2s;
 }
 .hero__sub {
   animation:
     heroSlideUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both,
     heroMarker 0.8s ease 1.5s both;
+  animation-delay: 1.6s;
 }
 .hero__lead {
-  animation-delay: 0.95s;
+  animation-delay: 2s;
 }
 .hero__text {
-  animation-delay: 1.1s;
+  animation-delay: 2.4s;
 }
 @keyframes heroSlideUp {
   from {
@@ -1211,13 +1213,24 @@ p.sec-label,
 .charm__ring {
   position: absolute;
   left: 50%;
-  bottom: 59%;
-  width: max(640px, 91vw);
+  bottom: 58.25%;
+  width: max(640px, 95vw);
   height: auto;
   max-width: none;
   transform: translateX(-50%);
   opacity: 0.09; /* リングの濃さ */
   pointer-events: none;
+}
+/* 画面に入ると中央を原点に拡大（JSで .js-anim → .is-animated を付与）
+   位置合わせの transform とは別の scale プロパティで拡縮する */
+.charm__ring.js-anim {
+  scale: 0;
+  transform-origin: 0 50%;
+}
+/* transition は拡大時だけ（.js-anim 付与時に縮小する動きを見せない） */
+.charm__ring.is-animated {
+  scale: 1;
+  transition: scale 1.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .charm__inner {
   position: relative;
@@ -1320,6 +1333,7 @@ p.sec-label,
    ------------------------------------------------ */
 .points {
   --k: calc(100vw / 1920);
+  --pw: 1920; /* デザイン幅（灰帯のスライド量の計算に使用） */
   --c-yellow: #f6d016;
   --c-gray-band: #eeeeee;
   position: relative;
@@ -1474,6 +1488,7 @@ p.sec-label,
 
   .points {
     --k: calc(100vw / 440);
+    --pw: 440;
     padding: calc(3 * var(--k)) 0 calc(21 * var(--k));
   }
   .point {
@@ -1565,14 +1580,15 @@ p.sec-label,
 }
 
 /* ---- アニメーション ----
-   ① 灰色の帯が斜め上からスライド → ② 青の帯が横からスライド → ③ テキスト・画像がフェードイン
+   ① 灰色の帯が帯の向きに沿って画面外からスライド → ② 青の帯が横からスライド → ③ テキスト・画像がフェードイン
    （JSで .js-anim を付与 → 画面に入ると .is-animated） */
 .point.js-anim .point__bg {
-  opacity: 0;
-  transform: translate(calc(var(--bg-dir, -1) * 160 * var(--k)), calc(-220 * var(--k)));
-  transition:
-    transform 1s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.8s ease;
+  /* 横に画面幅ぶん（--pw）ずらし、縦は帯の傾き（--gr - --gl）ぶんずらす → 帯の延長線上の画面外から入ってくる */
+  transform: translate(
+    calc(var(--bg-dir, -1) * var(--pw) * var(--k)),
+    calc(var(--bg-dir, -1) * (var(--gr) - var(--gl)) * var(--k))
+  );
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .point--even {
   --bg-dir: 1;
@@ -1606,7 +1622,8 @@ p.sec-label,
   .point.js-anim .point__bg,
   .point.js-anim .point__band,
   .point.js-anim .point__body,
-  .point.js-anim .point__img {
+  .point.js-anim .point__img,
+  .charm__ring.is-animated {
     transition: none;
   }
 }
@@ -2432,7 +2449,7 @@ p.sec-label,
 }
 
 /* ---------- マウスに追従するボール ----------
-   外側（位置）はJSで移動、内側の画像はCSSで常に回転 */
+   外側（位置）はJSで translate プロパティを更新、内側の画像はCSSで常に回転 */
 .cursor-ball {
   position: fixed;
   z-index: 1000;
@@ -2447,8 +2464,13 @@ p.sec-label,
     opacity 0.1s,
     width 0.5s ease,
     margin 0.5s ease,
-    height 0.5s ease;
-  will-change: transform;
+    height 0.5s ease,
+    scale 0.15s ease;
+  will-change: translate, scale;
+}
+/* クリック中は20%縮小。位置は translate プロパティで指定しているため、ボールの中心を原点に縮小される */
+.cursor-ball.is-pressed {
+  scale: 0.8;
 }
 /* リンクの上では1.5倍 */
 .cursor-ball.is-link {

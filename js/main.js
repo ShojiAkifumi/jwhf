@@ -143,9 +143,34 @@
           hio.disconnect();
         });
       },
-      { threshold: 0.4 },
+      { threshold: 0.8 },
     );
     hio.observe(history);
+  }
+
+  /* ---------- Charm のリング：中央を原点に拡大 ----------
+     リングの中心が画面の縦半分より上に来たら実行 */
+  const ring = document.querySelector(".charm__ring");
+  if (ring) {
+    ring.classList.add("js-anim");
+    let ticking = false;
+    const check = () => {
+      ticking = false;
+      // scale は中心を原点にかかるため、縮小中でも矩形の中心＝リングの中心
+      const r = ring.getBoundingClientRect();
+      if (r.top + r.height / 1.25 > innerHeight / 1.25) return;
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      requestAnimationFrame(() => requestAnimationFrame(() => ring.classList.add("is-animated")));
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(check);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    onScroll(); // 読み込み時にすでに条件を満たしている場合
   }
 
   /* ---------- POINT：灰帯 → 青帯 → 内容 の順に表示 ---------- */
@@ -202,7 +227,7 @@
     const render = () => {
       pos.x += (target.x - pos.x) * EASE;
       pos.y += (target.y - pos.y) * EASE;
-      ball.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+      ball.style.translate = `${pos.x}px ${pos.y}px`;
       // ほぼ追いついたら停止し、次のマウス移動で再開
       raf = Math.hypot(target.x - pos.x, target.y - pos.y) > 0.1 ? requestAnimationFrame(render) : null;
     };
@@ -220,7 +245,7 @@
       if (!ball.classList.contains("is-visible") || reduce) {
         pos.x = target.x;
         pos.y = target.y;
-        ball.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+        ball.style.translate = `${pos.x}px ${pos.y}px`;
         ball.classList.add("is-visible");
         return false;
       }
@@ -241,8 +266,12 @@
     // ウィンドウの外に出たら隠す
     document.documentElement.addEventListener("mouseleave", () => {
       hasPointer = false;
-      ball.classList.remove("is-visible", "is-link");
+      ball.classList.remove("is-visible", "is-link", "is-pressed");
     });
+    // クリック中（ボタンを押している間）は20%縮小
+    document.addEventListener("mousedown", (e) => e.button === 0 && ball.classList.add("is-pressed"));
+    document.addEventListener("mouseup", () => ball.classList.remove("is-pressed"));
+    window.addEventListener("blur", () => ball.classList.remove("is-pressed"));
   }
 
   /* ---------- クリック時の波紋（hero・「支援する」ボタン・Support） ---------- */
