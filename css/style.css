@@ -1852,7 +1852,7 @@ p.sec-label,
   --f: calc(min(100vw, 1920px) / 1920);
   position: relative;
   overflow: hidden;
-  background: #f4fcfd url(../img/future-bg.png) center top / cover;
+  background: #f4fcfd url(../img/future-bg.png) center top / cover no-repeat;
 }
 /* 下部の白い三角形（ウェルカム部分の背景） */
 .future::before {
@@ -2093,8 +2093,6 @@ p.sec-label,
 @media (max-width: 767px) {
   .future {
     --f: calc(100vw / 440);
-    background-size: 200% auto;
-    background-position: 30% top;
   }
   .future::before {
     height: calc(235 * var(--f));
@@ -2224,7 +2222,7 @@ p.sec-label,
 }
 .support__box {
   margin: 0 auto;
-  padding: clamp(25px, 3.6vw, 70px) var(--gutter) clamp(64px, 6vw, 100px);
+  padding: clamp(25px, 3.6vw, 70px) var(--gutter) clamp(56px, 6vw, 100px);
   background: #fff;
   text-align: center;
 }
@@ -2327,7 +2325,12 @@ p.sec-label,
 .footer {
   background: var(--c-footer);
   color: #fff;
-  padding: 50px var(--gutter) 16px;
+  padding: 30px var(--gutter) 16px;
+}
+@media (min-width: 768px) {
+  .footer {
+    padding-top: 50px;
+  }
 }
 .footer__inner {
   display: flex;
