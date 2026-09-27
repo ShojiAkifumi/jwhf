@@ -2106,14 +2106,14 @@ p.sec-label,
     font-size: max(15px, calc(15 * var(--f)));
   }
   .future__title {
-    margin-top: calc(10 * var(--f));
+    margin-top: calc(25 * var(--f));
     font-size: max(15px, calc(56 * var(--f)));
   }
   .future__lead {
     display: inline-block;
-    margin-top: calc(34 * var(--f));
-    font-size: max(15px, calc(22 * var(--f)));
-    line-height: 2.5;
+    margin-top: calc(15 * var(--f));
+    font-size: max(10px, calc(22 * var(--f)));
+    line-height: 2.2;
   }
   .future__lead span {
     padding: 0 0 calc(4 * var(--f));
@@ -2190,20 +2190,20 @@ p.sec-label,
     gap: calc(12 * var(--f));
   }
   .welcome__copy span {
-    height: calc(36 * var(--f));
+    height: calc(40 * var(--f));
     padding: 0 0 0 calc(18 * var(--f));
-    font-size: max(15px, calc(18 * var(--f)));
+    font-size: calc(23 * var(--f));
   }
   .welcome__copy span:nth-child(1) {
-    width: calc(358 * var(--f));
+    width: calc(410 * var(--f));
   }
   .welcome__copy span:nth-child(2) {
-    width: calc(258 * var(--f));
+    width: calc(295 * var(--f));
   }
   .welcome__copy span.is-lg {
     width: calc(402 * var(--f));
-    height: calc(48 * var(--f));
-    font-size: max(15px, calc(27 * var(--f)));
+    height: calc(55 * var(--f));
+    font-size: calc(34 * var(--f));
   }
   .welcome__copy span::before,
   .welcome__copy span::after {
