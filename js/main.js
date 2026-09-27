@@ -231,6 +231,8 @@
     welcomeDone = true;
     waiting.splice(0).forEach((fn) => fn());
   };
+  // 「支援する」ボタンで Support へ移動する場合は待たずに実行
+  document.querySelector(".gnav__cta")?.addEventListener("click", finishWelcome);
   // Support 内の要素なら .welcome の終了を待ってから実行
   const runAfterWelcome = (el, fn) => {
     if (welcomeDone || !el.closest(".support")) return fn();
