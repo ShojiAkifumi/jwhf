@@ -4,8 +4,26 @@
     {
       "name": "static",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["-y", "http-server", "-p", "5500", "-c-1"],
+      "runtimeArgs": [
+        "-y",
+        "http-server",
+        "-p",
+        "5500",
+        "-c-1"
+      ],
       "port": 5500
+    },
+    {
+      "name": "midi-composer",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5510",
+        "--directory",
+        "C:/Users/KUONN/Documents/AliceProjects/web/midi-composer"
+      ],
+      "port": 5510
     }
   ]
 }

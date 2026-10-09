@@ -1602,11 +1602,8 @@ p.sec-label,
   }
 }
 
-/* ---- アニメーション ----
-   ① 灰色の帯が帯の向きに沿って画面外からスライド → ② 青の帯が横からスライド → ③ テキスト・画像がフェードイン
-   （JSで .js-anim を付与 → 画面に入ると .is-animated） */
+/* ---- アニメーション ---- */
 .point.js-anim .point__bg {
-  /* 横に画面幅ぶん（--pw）ずらし、縦は帯の傾き（--gr - --gl）ぶんずらす → 帯の延長線上の画面外から入ってくる */
   transform: translate(
     calc(var(--bg-dir, -1) * var(--pw) * var(--k)),
     calc(var(--bg-dir, -1) * (var(--gr) - var(--gl)) * var(--k))
@@ -1626,7 +1623,7 @@ p.sec-label,
 .point.js-anim .point__body,
 .point.js-anim .point__img {
   opacity: 0;
-  transform: translateY(calc(30 * var(--k)));
+  transform: translateX(calc(var(--band-dir, 1) * 60 * var(--k)));
   transition:
     opacity 0.8s ease 0.85s,
     transform 0.8s ease 0.85s;
