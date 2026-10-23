@@ -1132,12 +1132,16 @@ p.sec-label,
    矢印が伸びるのに合わせて、各項目を順にフェードイン
    （JSで .js-anim を付与 → 画面に入ると .is-animated）
    --------------------------------------------------------- */
+/* 線と「>」は同じフレームで更新されるよう、どちらもレイアウト系のプロパティ（線：width ／ 「>」：right）で動かす
+   （線だけ transform にすると、合成スレッドで先に描画されて「>」が遅れ、線が「>」を突き抜けて見える） */
 .history.js-anim::before {
-  transform: scaleX(0);
-  transition: transform var(--line-dur) cubic-bezier(0.45, 0, 0.55, 1);
+  width: 0;
+  transition: width var(--line-dur) cubic-bezier(0.45, 0, 0.55, 1);
 }
 .history.js-anim::after {
-  right: calc(100% - clamp(16px, 1.4vw, 26px));
+  /* 線の先端と「>」の位置関係が常に完成形と同じになるよう、線と同じ距離（幅100%）を同じ時間・イージングで動かす
+     （完成形 right: 2px ＋ 移動距離 100%） */
+  right: calc(100% + 2px);
   opacity: 0;
   transition:
     right var(--line-dur) cubic-bezier(0.45, 0, 0.55, 1),
@@ -1165,7 +1169,7 @@ p.sec-label,
   --i: 3;
 }
 .history.is-animated::before {
-  transform: none;
+  width: 100%;
 }
 .history.is-animated::after {
   right: 2px;
@@ -1179,17 +1183,21 @@ p.sec-label,
 @media (max-width: 767px) {
   /* SPは上から下へ */
   .history.js-anim::before {
-    transform: scaleY(0);
+    width: 1px;
+    height: 0;
+    transition: height var(--line-dur) cubic-bezier(0.45, 0, 0.55, 1);
   }
   .history.js-anim::after {
     right: auto;
-    bottom: calc(100% - 12 * var(--a));
+    /* 縦の線と同じ距離（高さ100%）を動かす（完成形 bottom: 0） */
+    bottom: 100%;
     transition:
       bottom var(--line-dur) cubic-bezier(0.45, 0, 0.55, 1),
       opacity 0.2s;
   }
   .history.is-animated::before {
-    transform: none;
+    width: 1px;
+    height: 100%;
   }
   .history.is-animated::after {
     right: auto;
