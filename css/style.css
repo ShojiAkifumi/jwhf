@@ -292,8 +292,29 @@ p.sec-label,
   .header__toggle[aria-expanded="true"] span:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }
+  /* メニューパネルをヘッダーの「下」でスライドさせる：
+     子要素（.gnav）は親の背景より必ず前面に描画されるため、
+     ヘッダーの白背景を ::before に移し、パネルをその下の層に置く */
+  .header {
+    background: none;
+    box-shadow: none;
+  }
+  .header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+  .header__logo,
+  .header__toggle {
+    position: relative;
+    z-index: 2;
+  }
   .gnav {
     position: fixed;
+    z-index: 0;
     inset: var(--header-h) 0 auto 0;
     flex-direction: column;
     align-items: stretch;
